@@ -1,0 +1,35 @@
+{% include 'base.html' %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar productos</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Agregar Producto</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Agregar Producto</button>
+        </form>
+
+        <h2>Lista de Productos</h2>
+        <ul>
+            {% for product in products %}
+            <li>{{ product.name }} - Precio: {{ product.price }} - Cantidad: {{ product.quantity }}</li>
+            {% empty %}
+            <p>No hay productos disponibles.</p>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

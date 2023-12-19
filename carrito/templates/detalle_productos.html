@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+<html>
+
+<head>
+    <title>Detalle Producto</title>
+</head>
+
+<body>
+
+    {% block content %}
+    <style>
+        .sub-nav {
+            background-color: #616161;
+            /* Rojo */
+            font-size: 20px;
+            /* Tamaño de fuente más pequeño */
+            color: #ffffff;
+            /* Letra blanca */
+            padding: 0;
+            /* Ajusta el relleno según sea necesario */
+            display: flex;
+            /* Añadido para que los elementos se muestren en línea */
+            justify-content: center;
+            /* Añadido para centrar los elementos horizontalmente */
+        }
+
+        .sub-nav ul {
+            list-style: none;
+            /* Remove default list styling */
+            display: flex;
+            /* Display list items in a row */
+            padding: 0;
+            /* Remove default padding */
+        }
+
+        .sub-nav a {
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .sub-nav li {
+            margin-right: 10px;
+            /* Add some space between list items */
+        }
+
+        .sub-nav a:hover {
+            background-color: #4b4962;
+            /* Color de fondo más oscuro al pasar el mouse */
+        }
+
+        .container form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            /* Añadido para centrar los elementos horizontalmente */
+        }
+
+        .container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #5d54c1;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container button:hover {
+            background-color: #383281;
+        }
+    </style>
+
+    <nav class="sub-nav">
+        <ul>
+            <li><a href="{% url 'agregar_resena' product.id %}" class="btn">Agregar Reseña</a></li>
+            <li><a href="{% url 'reseñas' %}" class="btn">Ver reseñas</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="product-detail">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px; max-height: 300px;">
+            <div>
+                <h2>{{ product.name }}</h2>
+                <p>Descripción: {{ product.description }}</p>
+                <p>Precio: {{ product.price }}</p>
+                <p>Cantidad disponible: {{ product.quantity }}</p>
+            </div>
+        </div>
+
+        <form method="POST" action="{% url 'eliminar_producto' product.id %}">
+            {% csrf_token %}
+            <button type="submit">Eliminar Producto</button>
+        </form>
+
+        <form method="POST" action="{% url 'agregar_al_carro' product.id %}">
+            {% csrf_token %}
+            <button type="submit">Agregar al carrito</button>
+        </form>
+
+        <form method="POST" action="{% url 'editar_producto' product.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Modificar</button>
+        </form>
+    </div>
+    {% endblock %}
+
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-principal {
+            background-color: #515151;
+            font-size: 25px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navegation ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navegation li {
+            margin: 10px;
+        }
+
+        .navegation a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navegation a:hover {
+            background-color: #181f1b;
+        }
+
+        footer {
+            background-color: #333;
+            color: #000000;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            height: 40px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            margin: 0 auto;
+        }
+
+        footer a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #361b6a;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            /* Alinear a la derecha */
+        }
+
+
+        .user-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+            /* Alinea a la derecha */
+        }
+
+        .user-section li {
+            margin: 10px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        .logout-button button {
+            background-color: #515151;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .logout-button button:hover {
+            background-color: #181f1b;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .product {
+            flex: 0 0 calc(30% - 20px);
+            margin: 10px;
+            text-align: center;
+            border: 1px solid #cecece;
+            padding: 10px;
+        }
+
+        .product img {
+            max-width: 180px;
+        }
+
+        .product-detail {
+            display: flex;
+            align-items: center;
+        }
+
+        .product-detail img {
+            max-width: 180px;
+            margin-right: 20px;
+        }
+
+        .product-detail h2 {
+            font-size: 24px;
+        }
+
+        .product-detail p {
+            flex: 1;
+        }
+
+        .product-detail form {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav-principal">
+        <div class="navegation">
+            <div class="user-section">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li class="username">Bienvenido, {{ user.username }}!</li>
+                    <li class="logout-button">
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="main-options">
+                <ul>
+                    <li><a href="{% url 'lista_productos' %}">Explorar productos</a></li>
+                    <li><a href="{% url 'carroneitor' %}">Carro de compras</a></li>
+                    <li><a href="{% url 'agregar_productos' %}">Agregar productos</a></li>
+                    <li><a href="{% url 'sobre_nosotros' %}">Sobre nosotros</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <footer>
+        <p>Todos los derechos reservados a: " ", para ver más haga clic aquí --- > <a
+                href="{% url 'sobre_nosotros' %}">Sobre nosotros</a><br>
+            Bla bla bla Lorem ipsum dolor sit amet, consectetur adipiscing elit, lorem ipsum dolor sit amet,
+            consectetur
+            adipiscing elit,</p>
+    </footer>
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+
+</html>

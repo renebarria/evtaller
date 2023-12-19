@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Reseñas de Productos</h1>
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.product.name }}</strong> - {{ review.rating }} estrellas
+            <p>{{ review.comment }}</p>
+        </li>
+        {% empty %}
+        <p>No hay reseñas disponibles.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'lista_productos' %}" class="btn">Volver a la lista de productos</a>
+</div>
+</div>
+{% endblock %}
