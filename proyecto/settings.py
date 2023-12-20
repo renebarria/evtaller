@@ -88,14 +88,21 @@ WSGI_APPLICATION = 'proyecto.wsgi.application'
    # }
 #}
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'db1',
+#       'USER': 'admin',
+#        'PASSWORD': 'admin001',
+#        'HOST': 'nice.cxnni1xqkizm.us-east-2.rds.amazonaws.com',
+#        'PORT': '3306',
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db1',
-        'USER': 'admin',
-        'PASSWORD': 'admin001',
-        'HOST': 'nice.cxnni1xqkizm.us-east-2.rds.amazonaws.com',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
